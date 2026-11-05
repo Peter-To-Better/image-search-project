@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+node_modules/
+frontend/dist/
+data/raw/
+data/features/
+data/models/
+data/queries_dup/
+.DS_Store
