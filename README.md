@@ -14,17 +14,25 @@
 需要 **Python 3.10+** 與 **Node.js 18+**（沒有的話：`brew install python node`）。
 
 ```bash
-cd ~/Desktop/image-search-project
+git clone https://github.com/Peter-To-Better/image-search-project.git
+cd image-search-project
 ./setup.sh            # 建立 .venv、安裝 Python 套件、npm install、build 前端（約 3–5 分鐘）
+./download_data.sh    # 下載 Caltech-101 與 ResNet-50 模型、計算特徵（約 10–15 分鐘）
 ./start.sh            # 啟動 → 自動打開 http://localhost:8000
 ```
 
-> 資料集、特徵、ResNet 模型和實驗結果都已經預先算好放在 `data/` 與 `results/`，裝完套件就能直接 Demo。
+> 資料集與模型不在 repo 裡，由 `download_data.sh` 從原始來源下載：
+> - Caltech-101：https://data.caltech.edu/records/mzrjq-6wc02 （CC BY 4.0，下載失敗時改用 [鏡像](https://github.com/ultralytics/assets/releases/download/v0.0.0/caltech101.zip)）
+> - ResNet-50 ONNX：https://github.com/onnx/models （`resnet50-v2-7.onnx`）
+>
+> 也可以手動下載 Caltech-101，解壓到 `data/raw/caltech101/`（每個子資料夾是一個類別），再執行 `./download_data.sh`，就會略過下載。
+>
+> `results/` 裡的實驗結果已經附在 repo 裡，不必重跑實驗。
 
 ### 想從零重跑全部流程
 
 ```bash
-rm -rf data results      # 清掉預先算好的東西（可選）
+rm -rf results           # 清掉附帶的實驗結果（可選）
 ./run_experiments.sh     # 下載資料集 → 算特徵 → 跑實驗（約 15–20 分鐘）
 ```
 
