@@ -17,17 +17,17 @@
 git clone https://github.com/Peter-To-Better/image-search-project.git
 cd image-search-project
 ./setup.sh            # 建立 .venv、安裝 Python 套件、npm install、build 前端（約 3–5 分鐘）
-./download_data.sh    # 下載 Caltech-101 與 ResNet-50 模型、計算特徵（約 10–15 分鐘）
+./run_experiments.sh  # 下載 Caltech-101 與 ResNet-50 模型 → 算特徵 → 跑實驗（約 15–20 分鐘）
 ./start.sh            # 啟動 → 自動打開 http://localhost:8000
 ```
 
-> 資料集與模型不在 repo 裡，由 `download_data.sh` 從原始來源下載：
+> 資料集、特徵和模型不在 repo 裡（太大），`run_experiments.sh` 會自動從原始來源下載：
 > - Caltech-101：https://data.caltech.edu/records/mzrjq-6wc02 （CC BY 4.0，下載失敗時改用 [鏡像](https://github.com/ultralytics/assets/releases/download/v0.0.0/caltech101.zip)）
 > - ResNet-50 ONNX：https://github.com/onnx/models （`resnet50-v2-7.onnx`）
 >
-> 也可以手動下載 Caltech-101，解壓到 `data/raw/caltech101/`（每個子資料夾是一個類別），再執行 `./download_data.sh`，就會略過下載。
+> 也可以手動下載 Caltech-101，解壓到 `data/raw/caltech101/`（每個子資料夾是一個類別），再執行 `./run_experiments.sh`，就會略過下載。
 >
-> `results/` 裡的實驗結果已經附在 repo 裡，不必重跑實驗。
+> 只想下載資料、不跑實驗：`source .venv/bin/activate && cd backend && python scripts/prepare_data.py && python scripts/build_features.py`
 
 ### 想從零重跑全部流程
 
