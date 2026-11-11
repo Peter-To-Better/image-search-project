@@ -128,7 +128,7 @@ def results():
     f = RESULTS_DIR / "results.json"
     if not f.exists():
         raise HTTPException(404, "尚未執行 scripts/evaluate.py")
-    return json.loads(f.read_text())
+    return json.loads(f.read_text(encoding="utf-8"))
 
 
 # 若前端已 build (npm run build)，直接由後端提供網頁

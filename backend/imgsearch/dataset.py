@@ -55,14 +55,14 @@ def make_split(dataset_dir: Path = DATASET_DIR, queries_per_class=QUERIES_PER_CL
 
     split = {"classes": classes, "gallery": gallery, "semantic_queries": sem_queries,
              "duplicate_queries": dup_queries}
-    SPLIT_FILE.write_text(json.dumps(split, ensure_ascii=False, indent=1))
+    SPLIT_FILE.write_text(json.dumps(split, ensure_ascii=False, indent=1), encoding="utf-8")
     return split
 
 
 def load_split():
     if not SPLIT_FILE.exists():
         raise FileNotFoundError("找不到 data/split.json，請先執行 python scripts/prepare_data.py")
-    return json.loads(SPLIT_FILE.read_text())
+    return json.loads(SPLIT_FILE.read_text(encoding="utf-8"))
 
 
 def open_image(path) -> Image.Image:

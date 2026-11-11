@@ -370,7 +370,7 @@ if __name__ == "__main__":
     split = load_split()
     feats = F.available()
     print("可用特徵：", feats)
-    R = json.loads(RES_FILE.read_text()) if RES_FILE.exists() else {}
+    R = json.loads(RES_FILE.read_text(encoding="utf-8")) if RES_FILE.exists() else {}
     todo = a.only or ["accuracy", "indexes", "scaling", "lsh", "kdtree", "bktree"]
     R["meta"] = {"gallery": len(split["gallery"]), "semantic_queries": len(split["semantic_queries"]),
                  "duplicate_queries": len(split["duplicate_queries"]), "classes": len(split["classes"]),
@@ -384,6 +384,6 @@ if __name__ == "__main__":
             continue
         else:
             R[name] = globals()[f"exp_{name}"](split, feats)
-        RES_FILE.write_text(json.dumps(R, ensure_ascii=False, indent=1))
+        RES_FILE.write_text(json.dumps(R, ensure_ascii=False, indent=1), encoding="utf-8")
     plot(R)
     print(f"\n結果已寫入 {RES_FILE.relative_to(ROOT)} 與 results/*.png")

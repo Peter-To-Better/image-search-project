@@ -9,9 +9,9 @@
 
 ---
 
-## 快速開始（macOS）
+## 快速開始（macOS / Linux）
 
-需要 **Python 3.10+** 與 **Node.js 18+**（沒有的話：`brew install python node`）。
+需要 **Python 3.10+** 與 **Node.js 18+**（macOS 沒有的話：`brew install python node`）。
 
 ```bash
 git clone https://github.com/Peter-To-Better/image-search-project.git
@@ -29,11 +29,22 @@ cd image-search-project
 >
 > 只想下載資料、不跑實驗：`source .venv/bin/activate && cd backend && python scripts/prepare_data.py && python scripts/build_features.py`
 
+## 快速開始（Windows）
+
+**電腦上什麼都沒裝也可以**：`setup.bat` 會先檢查 Python、Node.js、VC++ 執行階段，缺什麼就問你要不要自動安裝。
+
+1. 在 GitHub 按 **Code → Download ZIP**，解壓縮（或用 `git clone`）
+2. 雙擊 **`setup.bat`**：檢查並安裝環境（只要做一次）
+3. 雙擊 **`run_experiments.bat`**：下載資料集與模型 → 算特徵 → 跑實驗（約 15–20 分鐘，只要做一次）
+4. 雙擊 **`start.bat`**：自動打開 http://localhost:8000
+
+👉 **完整圖文步驟和常見問題請看 [WINDOWS.md](WINDOWS.md)**
+
 ### 想從零重跑全部流程
 
 ```bash
-rm -rf results           # 清掉附帶的實驗結果（可選）
-./run_experiments.sh     # 下載資料集 → 算特徵 → 跑實驗（約 15–20 分鐘）
+rm -rf results           # 清掉附帶的實驗結果（可選；Windows：rmdir /s /q results）
+./run_experiments.sh     # 下載資料集 → 算特徵 → 跑實驗（約 15–20 分鐘；Windows：run_experiments.bat）
 ```
 
 ### 加入 DINOv2 / CLIP（選用，可以用文字搜圖）
@@ -48,7 +59,7 @@ python scripts/evaluate.py
 ### 開發模式（改前端程式時用，會即時刷新）
 
 ```bash
-# 終端機 1
+# 終端機 1（Windows：.venv\Scripts\activate && cd backend && python -m uvicorn server:app --reload --port 8000）
 source .venv/bin/activate && cd backend && python -m uvicorn server:app --reload --port 8000
 # 終端機 2
 cd frontend && npm run dev        # → http://localhost:5173
